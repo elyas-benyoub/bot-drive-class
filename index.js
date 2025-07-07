@@ -8,8 +8,9 @@ const client = new Client({
 });
 
 // Auth Google Drive
+const keyData = Buffer.from(process.env.GOOGLE_KEY_BASE64, "base64").toString("utf8");
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.join(__dirname, process.env.GOOGLE_SERVICE_ACCOUNT_JSON),
+  credentials: JSON.parse(keyData),
   scopes: ["https://www.googleapis.com/auth/drive.readonly"],
 });
 const drive = google.drive({ version: "v3", auth });
